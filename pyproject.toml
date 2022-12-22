@@ -12,6 +12,7 @@ gunicorn = "^20.1.0"
 dj-database-url = "^1.2.0"
 psycopg2-binary = "^2.9.5"
 whitenoise = "^6.2.0"
+django-bootstrap4 = "^22.3"
 
 [tool.poetry.dev-dependencies]
 
