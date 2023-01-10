@@ -45,3 +45,19 @@ class UserEdit(View):
             form.save()
             return redirect('users')
         return render(request, self.template_name, context={'form': form, 'user_id': user_id})
+
+
+class UserDelete(View):
+    template_name = 'user_delete.html'
+    def get(self, request, *args, **kwargs):
+        user_id = kwargs.get('id')
+        user = User.objects.get(id=user_id)
+        form = Register
+        return render(request, self.template_name, context={'user_id': user_id, 'user': user})
+
+    def post(self, request, *args, **kwargs):
+        user_id = kwargs.get('id')
+        user = User.objects.get(id=user_id)
+        if user:
+            user.delete()
+        return redirect('users')

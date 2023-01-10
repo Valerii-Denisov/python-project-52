@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-10 10:07+0300\n"
+"POT-Creation-Date: 2023-01-10 11:25+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -52,6 +52,18 @@ msgstr "Узнать больше"
 #: task_manager/templates/user_create.html:23
 msgid "Register"
 msgstr "Зарегистрировать"
+
+#: task_manager/templates/user_delete.html:7
+msgid "Deleting a user"
+msgstr "Удаление ползователя"
+
+#: task_manager/templates/user_delete.html:11
+msgid "Are you sure you want to delete"
+msgstr "Вы уверены, что хотите удалить"
+
+#: task_manager/templates/user_delete.html:12
+msgid "Yes, delete"
+msgstr "Да, удалить"
 
 #: task_manager/templates/user_edit.html:7
 msgid "Edit user"
