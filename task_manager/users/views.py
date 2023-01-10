@@ -17,6 +17,5 @@ class UserRegister(View):
     template_name = 'user_create.html'
 
     def get(self, request, *args, **kwargs):
-        model = User
         form = Register
         return render(request, self.template_name, context={'form': form})

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-09 16:00+0300\n"
+"POT-Creation-Date: 2023-01-10 08:42+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,7 @@ msgid "Log in"
 msgstr "Вход"
 
 #: task_manager/templates/base.html:47
+#: task_manager/templates/user_create.html:6
 msgid "Registration"
 msgstr "Регистрация"
 
@@ -47,6 +48,10 @@ msgstr "Практические курсы по программировани�
 #: task_manager/templates/index.html:12
 msgid "See more"
 msgstr "Узнать больше"
+
+#: task_manager/templates/user_create.html:13
+msgid "Register"
+msgstr "Зарегистрировать"
 
 #: task_manager/templates/users.html:11
 msgid "Username"

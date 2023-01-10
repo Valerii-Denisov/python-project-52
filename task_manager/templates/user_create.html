@@ -1,7 +1,16 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+{% load i18n %}
+
+{% block content %}
+<h1 class="my-4">{% translate "Registration" %}</h1>
 <form action="{% url 'user_create' %}" method="post">
-    {% csrf_token %}
-    <table border="1">
-       {{ form }}
-    </table>
-    <input type="submit" value="Сохранить">
+    <div class="container wrapper flex-grow-1">
+        {% csrf_token %}
+        <table>
+           {% bootstrap_form form %}
+        </table>
+        <button class="btn btn-primary btn-lg" type="submit">{% translate "Register" %}</button>
+    </div>
 </form>
+{% endblock %}
