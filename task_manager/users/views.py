@@ -26,3 +26,22 @@ class UserRegister(View):
             form.save()
             return redirect('users')
         return render(request, self.template_name, context={'form': form})
+
+
+class UserEdit(View):
+    template_name = 'user_edit.html'
+
+    def get(self, request, *args, **kwargs):
+        user_id = kwargs.get('id')
+        user = User.objects.get(id=user_id)
+        form = Register(instance=user)
+        return render(request, self.template_name, context={'form': form, 'user_id': user_id})
+
+    def post(self, request, *args, **kwargs):
+        user_id = kwargs.get('id')
+        user = User.objects.get(id=user_id)
+        form = Register(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+        return render(request, self.template_name, context={'form': form, 'user_id': user_id})
