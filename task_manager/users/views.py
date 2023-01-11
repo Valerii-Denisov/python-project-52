@@ -1,63 +1,41 @@
 from django.shortcuts import render, redirect
 from django.views import View
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from task_manager.users.models import User
 from task_manager.users.forms import Register
 
 
-class UsersView(View):
+class UsersView(ListView):
     template_name = 'users.html'
-
-    def get(self, request, *args, **kwargs):
-        users = User.objects.all()
-        return render(request, self.template_name, context={'users': users})
+    model = User
+    context_object_name = 'user_list'
 
 
-class UserRegister(View):
+class UserRegister(CreateView):
     template_name = 'user_create.html'
-
-    def get(self, request, *args, **kwargs):
-        form = Register
-        return render(request, self.template_name, context={'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = Register(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('users')
-        return render(request, self.template_name, context={'form': form})
+    model = User
+    form_class = Register
+    success_url = reverse_lazy('users')
 
 
-class UserEdit(View):
+class UserEdit(UpdateView):
     template_name = 'user_edit.html'
+    model = User
+    form_class = Register
+    success_url = reverse_lazy('users')
+    pk_url_kwarg = 'id'
 
-    def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
-        user = User.objects.get(id=user_id)
-        form = Register(instance=user)
-        return render(request, self.template_name, context={'form': form, 'user_id': user_id})
-
-    def post(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
-        user = User.objects.get(id=user_id)
-        form = Register(request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect('users')
-        return render(request, self.template_name, context={'form': form, 'user_id': user_id})
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.request.user.id
+        context['user_id'] = user_id
+        return context
 
 
-class UserDelete(View):
+class UserDelete(DeleteView):
     template_name = 'user_delete.html'
-    def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
-        user = User.objects.get(id=user_id)
-        form = Register
-        return render(request, self.template_name, context={'user_id': user_id, 'user': user})
-
-    def post(self, request, *args, **kwargs):
-        user_id = kwargs.get('id')
-        user = User.objects.get(id=user_id)
-        if user:
-            user.delete()
-        return redirect('users')
+    model = User
+    success_url = reverse_lazy('users')
+    pk_url_kwarg = 'id'
