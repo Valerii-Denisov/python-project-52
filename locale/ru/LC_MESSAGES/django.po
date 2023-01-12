@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-10 11:25+0300\n"
+"POT-Creation-Date: 2023-01-12 16:48+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,19 +20,37 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: task_manager/templates/base.html:17 task_manager/templates/base.html:21
+#: task_manager/templates/base.html:16 task_manager/templates/base.html:20
 msgid "Task manager"
 msgstr "Менеджер задач"
 
-#: task_manager/templates/base.html:33 task_manager/templates/users.html:5
+#: task_manager/templates/base.html:33 task_manager/templates/base.html:58
+#: task_manager/templates/users.html:5
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/templates/base.html:41
+#: task_manager/templates/base.html:39
+msgid "Status"
+msgstr "Статусы"
+
+#: task_manager/templates/base.html:45
+msgid "Labels"
+msgstr "Метки"
+
+#: task_manager/templates/base.html:51
+msgid "Tasks"
+msgstr "Задачи"
+
+#: task_manager/templates/base.html:68
+msgid "Log out"
+msgstr "Вsход"
+
+#: task_manager/templates/base.html:75 task_manager/templates/user_login.html:7
+#: task_manager/templates/user_login.html:23
 msgid "Log in"
 msgstr "Вход"
 
-#: task_manager/templates/base.html:47
+#: task_manager/templates/base.html:81
 #: task_manager/templates/user_create.html:7
 msgid "Registration"
 msgstr "Регистрация"
@@ -55,7 +73,7 @@ msgstr "Зарегистрировать"
 
 #: task_manager/templates/user_delete.html:7
 msgid "Deleting a user"
-msgstr "Удаление ползователя"
+msgstr "Удаление пользователя"
 
 #: task_manager/templates/user_delete.html:11
 msgid "Are you sure you want to delete"
