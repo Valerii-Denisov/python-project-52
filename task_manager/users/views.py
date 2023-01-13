@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.utils.translation import gettext as translate
+from django.utils.translation import gettext as _
 from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -22,7 +22,7 @@ class UserRegister(SuccessMessageMixin, CreateView):
     model = User
     form_class = Register
     success_url = reverse_lazy('user_login')
-    success_message = translate('The user has been successfully registered')
+    success_message = _('The user has been successfully registered')
 
 
 class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -39,10 +39,10 @@ class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
-            message = translate('You dont have the rights to change another user.')
+            message = _('You dont have the rights to change another user')
             url = reverse_lazy('users')
         else:
-            message = translate('You are not logged in! Please log in.')
+            message = _('You are not logged in! Please log in')
             url = self.login_url
         messages.warning(self.request, message)
         return redirect(url)
@@ -53,7 +53,7 @@ class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         password = self.request.POST['password1']
         user = authenticate(self.request, username=username, password=password)
         login(self.request, user)
-        messages.success(self.request, translate('User successfully changed'))
+        messages.success(self.request, _('User successfully changed'))
         return redirect(self.success_url)
 
 
@@ -70,7 +70,7 @@ class UserDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, D
     success_url = reverse_lazy('users')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
-    success_message = translate('The user has been successfully deleted')
+    success_message = _('The user has been successfully deleted')
 
     def test_func(self):
         user = self.get_object()
@@ -78,10 +78,10 @@ class UserDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, D
 
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
-            message = translate('You dont have the rights to change another user.')
+            message = _('You dont have the rights to change another user')
             url = reverse_lazy('users')
         else:
-            message = translate('You are not logged in! Please log in.')
+            message = _('You are not logged in! Please log in')
             url = self.login_url
         messages.warning(self.request, message)
         return redirect(url)

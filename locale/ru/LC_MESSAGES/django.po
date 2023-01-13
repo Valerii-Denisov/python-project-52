@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-12 16:48+0300\n"
+"POT-Creation-Date: 2023-01-13 09:16+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -43,7 +43,7 @@ msgstr "Задачи"
 
 #: task_manager/templates/base.html:68
 msgid "Log out"
-msgstr "Вsход"
+msgstr "Выход"
 
 #: task_manager/templates/base.html:75 task_manager/templates/user_login.html:7
 #: task_manager/templates/user_login.html:23
@@ -102,3 +102,31 @@ msgstr "Полное имя"
 #: task_manager/templates/users.html:13
 msgid "Created at"
 msgstr "Дата создания"
+
+#: task_manager/users/views.py:25
+msgid "The user has been successfully registered"
+msgstr "Пользователь был успешно зарегистрирован"
+
+#: task_manager/users/views.py:42 task_manager/users/views.py:81
+msgid "You dont have the rights to change another user"
+msgstr "У вас нет прав изменять другого пользователя"
+
+#: task_manager/users/views.py:45 task_manager/users/views.py:84
+msgid "You are not logged in! Please log in"
+msgstr "Вы не вошли в систему! Пожалуйста, войдите в систему"
+
+#: task_manager/users/views.py:56
+msgid "User successfully changed"
+msgstr "Пользователь успешно изменен"
+
+#: task_manager/users/views.py:73
+msgid "The user has been successfully deleted"
+msgstr "Пользователь был успешно удален"
+
+#: task_manager/views.py:14
+msgid "You are logged in"
+msgstr "Вы вошли в систему"
+
+#: task_manager/views.py:19
+msgid "You are logged out"
+msgstr "Вы вышли из системы"
