@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<h1 class="my-4">{% translate "Statuses" %}</h1>
+
+<a href="#">Создать</a>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>{% translate "Name" %}</th>
+      <th>{% translate "Created at" %}</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for status in status_list %}
+      <tr>
+        <td>{{ status.id }}</td>
+        <td>{{ status.name  }}</td>
+        <td>{{ status.timestamp|date:'d.m.Y' }}</td>
+        <td>
+          <a href="#">Изменить</a>
+          <br>
+          <a href="#" >Удалить</a>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
