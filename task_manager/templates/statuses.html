@@ -4,7 +4,7 @@
 {% block content %}
 <h1 class="my-4">{% translate "Statuses" %}</h1>
 
-<a href="#">Создать</a>
+<a href="{% url 'status_create' %}">Создать</a>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -15,7 +15,7 @@
   </thead>
 
   <tbody>
-    {% for status in status_list %}
+    {% for status in statuses_list %}
       <tr>
         <td>{{ status.id }}</td>
         <td>{{ status.name  }}</td>

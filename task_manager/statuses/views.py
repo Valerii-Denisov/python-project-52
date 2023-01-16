@@ -8,26 +8,29 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from task_manager.statuses.models import Status
-from task_manager.users.forms import Register
+from task_manager.statuses.forms import Create
 
 
-class StatusView(ListView):
+class StatusView(LoginRequiredMixin, ListView):
     template_name = 'statuses.html'
     model = Status
     context_object_name = 'statuses_list'
     login_url = reverse_lazy('user_login')
 
 
-    def test_func(self):
-        user = self.get_object()
-        return self.request.user.id == user.id
-
     def handle_no_permission(self):
-        if self.request.user.is_authenticated:
-            message = _('You dont have the rights to change another user')
-            url = reverse_lazy('users')
-        else:
-            message = _('You are not logged in! Please log in')
-            url = self.login_url
-        messages.warning(self.request, message)
+        url = self.login_url
+        messages.warning(self.request, _('You are not logged in! Please log in'))
+        return redirect(url)
+
+
+class StatusRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    template_name = 'status_create.html'
+    model = Status
+    form_class = Create
+    success_url = reverse_lazy('statuses')
+    success_message = _('The status has been successfully registered')
+    def handle_no_permission(self):
+        url = self.login_url
+        messages.warning(self.request, _('You are not logged in! Please log in'))
         return redirect(url)
