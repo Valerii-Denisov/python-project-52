@@ -1,11 +1,10 @@
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
-from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from task_manager.statuses.models import Status
 from task_manager.statuses.forms import Create
@@ -30,6 +29,34 @@ class StatusRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = Create
     success_url = reverse_lazy('statuses')
     success_message = _('The status has been successfully registered')
+    def handle_no_permission(self):
+        url = self.login_url
+        messages.warning(self.request, _('You are not logged in! Please log in'))
+        return redirect(url)
+
+
+class StatusEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    template_name = 'status_edit.html'
+    model = Status
+    form_class = Create
+    success_url = reverse_lazy('statuses')
+    pk_url_kwarg = 'id'
+    login_url = reverse_lazy('user_login')
+    success_message = _('The status has been successfully updated')
+
+    def handle_no_permission(self):
+        url = self.login_url
+        messages.warning(self.request, _('You are not logged in! Please log in'))
+        return redirect(url)
+
+class StatusDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    template_name = 'status_delete.html'
+    model = Status
+    success_url = reverse_lazy('statuses')
+    pk_url_kwarg = 'id'
+    login_url = reverse_lazy('user_login')
+    success_message = _('The status has been successfully deleted')
+
     def handle_no_permission(self):
         url = self.login_url
         messages.warning(self.request, _('You are not logged in! Please log in'))
