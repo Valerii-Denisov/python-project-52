@@ -1,7 +1,7 @@
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -73,4 +73,15 @@ class TaskDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
             message = _('You are not logged in! Please log in')
             url = self.login_url
         messages.warning(self.request, message)
+        return redirect(url)
+
+
+class OneTaskView(LoginRequiredMixin, DetailView):
+    template_name = 'task_detail.html'
+    model = Task
+    pk_url_kwarg = 'id'
+    login_url = reverse_lazy('user_login')
+    def handle_no_permission(self):
+        url = self.login_url
+        messages.warning(self.request, _('You are not logged in! Please log in'))
         return redirect(url)
