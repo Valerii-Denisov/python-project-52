@@ -31,11 +31,13 @@
       <div class="row p-1">
         <div class="col">
           <h6>{% translate "Labels" %}:</h6>
+          {%for label in task.labels.all %}
           <ul>
 
-              <li>#</li>
+              <li>{{label}}</li>
 
           </ul>
+          {%endfor%}
         </div>
       </div>
       <div class="row p-1">

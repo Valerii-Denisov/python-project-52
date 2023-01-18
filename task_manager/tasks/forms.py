@@ -11,4 +11,5 @@ class Create(ModelForm):
             'description',
             'status',
             'executor',
+            'labels',
         )
