@@ -5,6 +5,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import ProtectedError
 
 from task_manager.statuses.models import Status
 from task_manager.statuses.forms import Create
@@ -61,3 +62,13 @@ class StatusDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
         url = self.login_url
         messages.warning(self.request, _('You are not logged in! Please log in'))
         return redirect(url)
+
+
+    def form_valid(self, form):
+        try:
+            self.object.delete()
+            messages.success(self.request, self.success_message)
+            return redirect(self.success_url)
+        except ProtectedError:
+            messages.warning(self.request, _('It is not possible to delete a status because it is being used'))
+            return redirect(self.success_url)

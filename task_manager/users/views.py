@@ -6,6 +6,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import ProtectedError
 
 from task_manager.users.models import User
 from task_manager.users.forms import Register
@@ -85,3 +86,13 @@ class UserDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, D
             url = self.login_url
         messages.warning(self.request, message)
         return redirect(url)
+
+    def form_valid(self, form):
+        try:
+            self.object.delete()
+            messages.success(self.request, self.success_message)
+            return redirect(self.success_url)
+        except ProtectedError:
+            messages.warning(self.request, _('It is not possible to delete a user because it is being used'))
+            return redirect(self.success_url)
+
