@@ -26,12 +26,7 @@ class TaskView(LoginRequiredMixin, ListView):
 class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     template_name = 'task_create.html'
     model = Task
-    fields = ['name',
-            'description',
-            'status',
-            'executor',
-              ]
-    #form_class = Create
+    form_class = Create
     success_url = reverse_lazy('tasks')
     success_message = _('The tasks has been successfully registered')
     def handle_no_permission(self):
@@ -39,30 +34,43 @@ class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
         messages.warning(self.request, _('You are not logged in! Please log in'))
         return redirect(url)
 
-'''
-class StatusEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
-    template_name = 'status_edit.html'
-    model = Status
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class TaskEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    template_name = 'task_edit.html'
+    model = Task
     form_class = Create
-    success_url = reverse_lazy('statuses')
+    success_url = reverse_lazy('tasks')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
-    success_message = _('The status has been successfully updated')
+    success_message = _('The task has been successfully updated')
 
     def handle_no_permission(self):
         url = self.login_url
         messages.warning(self.request, _('You are not logged in! Please log in'))
         return redirect(url)
 
-class StatusDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
-    template_name = 'status_delete.html'
-    model = Status
-    success_url = reverse_lazy('statuses')
+class TaskDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    template_name = 'task_delete.html'
+    model = Task
+    success_url = reverse_lazy('tasks')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
-    success_message = _('The status has been successfully deleted')
+    success_message = _('The task has been successfully deleted')
+
+    def test_func(self):
+        user = self.get_object()
+        return self.request.user.id == user.id
 
     def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
-        return redirect(url)'''
+        if self.request.user.is_authenticated:
+            message = _('You dont have the rights to delete task of another user')
+            url = reverse_lazy('tasks')
+        else:
+            message = _('You are not logged in! Please log in')
+            url = self.login_url
+        messages.warning(self.request, message)
+        return redirect(url)

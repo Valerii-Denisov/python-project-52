@@ -27,9 +27,9 @@
         <td>{{ task.executor  }}</td>
         <td>{{ task.timestamp|date:'d.m.Y' }}</td>
         <td>
-          <a href="{% url 'status_edit' id=status.id%}">{% translate "Edit" %}</a>
+          <a href="{% url 'task_edit' id=task.id%}">{% translate "Edit" %}</a>
           <br>
-          <a href="{% url 'status_destroy' id=status.id%}" >{% translate "Delete" %}</a>
+          <a href="{% url 'task_destroy' id=task.id%}" >{% translate "Delete" %}</a>
         </td>
       </tr>
     {% endfor %}
