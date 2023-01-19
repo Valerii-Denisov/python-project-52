@@ -65,6 +65,17 @@ beautifulsoup4 = ">=4.8.0"
 Django = ">=3.2"
 
 [[package]]
+name = "django-filter"
+version = "22.1"
+description = "Django-filter is a reusable Django application for allowing users to filter querysets dynamically."
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "gunicorn"
 version = "20.1.0"
 description = "WSGI HTTP Server for UNIX"
@@ -135,7 +146,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "d38bef92ce76d7fd25bf905edf163512d32828c97e15d37ac5b2691d4b2d9357"
+content-hash = "4a84836fc1a53ebee1ee1c4fb923f8af30e991a241aa9cf30d81e6a46b57c363"
 
 [metadata.files]
 asgiref = []
@@ -143,6 +154,7 @@ beautifulsoup4 = []
 dj-database-url = []
 django = []
 django-bootstrap4 = []
+django-filter = []
 gunicorn = []
 psycopg2-binary = []
 python-dotenv = []

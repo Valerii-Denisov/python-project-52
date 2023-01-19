@@ -1,21 +1,22 @@
 from django.shortcuts import redirect
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
+from django_filters.views import FilterView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from .filter import TaskFilter
 from task_manager.tasks.models import Task
 from task_manager.tasks.forms import Create
 
 
-class TaskView(LoginRequiredMixin, ListView):
+class TaskView(LoginRequiredMixin, FilterView):
     template_name = 'tasks.html'
     model = Task
     context_object_name = 'tasks_list'
     login_url = reverse_lazy('user_login')
-
+    filterset_class = TaskFilter
 
     def handle_no_permission(self):
         url = self.login_url

@@ -1,10 +1,20 @@
 {% extends "base.html" %}
+{% load bootstrap4 %}
 {% load i18n %}
 
 {% block content %}
 <h1 class="my-4">{% translate "Tasks" %}</h1>
-
 <a href="{% url 'task_create' %}">{% translate "Create task" %}</a>
+<div class="card mb-3">
+  <div class="card-body bg-light">
+    <form class="form-inline center my-auto" method="get">
+            {% bootstrap_form filter.form form_group_class="form-group is-valid" field_class="ml-4 mr-3"%}
+            <div class="form-group">
+              <button class="btn btn-primary btn-lg" type="submit">{% translate "Show" %}</button>
+            </div>
+    </form>
+  </div>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -14,6 +24,7 @@
       <th>{% translate "Author" %}</th>
       <th>{% translate "Executor" %}</th>
       <th>{% translate "Created at" %}</th>
+      <th></th>
     </tr>
   </thead>
 
