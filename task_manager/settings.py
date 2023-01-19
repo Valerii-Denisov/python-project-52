@@ -26,9 +26,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+
+ROLLBAR_KEY = os.getenv('ROLLBAR_KEY')
+
+ROLLBAR = {
+    'access_token': ROLLBAR_KEY,
+    'environment': 'development' if DEBUG else 'production',
+    'code_version': '1.0',
+    'root': BASE_DIR,
+}
 
 ALLOWED_HOSTS = ['*', '.railway.com', '127.0.0.1']
 
@@ -50,6 +58,7 @@ INSTALLED_APPS = [
     'task_manager.labels',
     'bootstrap4',
     'django_filters',
+    'rollbar',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +70,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
 ROOT_URLCONF = 'task_manager.urls'
