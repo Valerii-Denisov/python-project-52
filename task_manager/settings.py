@@ -161,4 +161,4 @@ LOGIN_REDIRECT_URL = 'Home'
 
 LOGOUT_REDIRECT_URL = 'Home'
 
-FIXTURES = [os.path.join(BASE_DIR, 'fixtures')]
+FIXTURE_DIRS = (os.path.join(BASE_DIR, 'fixtures'),)

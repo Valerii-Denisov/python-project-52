@@ -5,12 +5,12 @@ from django.core.exceptions import ObjectDoesNotExist
 
 
 class UserTestCase(TestCase):
-    fixtures = [ 'label', 'status.JSON', 'task.JSON']
+    fixtures = [ 'user.json', 'label.json', 'status.json', 'task.json']
     def setUp(self):
         self.user2 = User.objects.get(pk=12)
         self.user3 = User.objects.get(pk=13)
-        self.user_list = reverse('user_list')
-        self.login = reverse('login')
+        self.user_list = reverse('users')
+        self.login = reverse('user_login')
         self.form_data = {
             'username': 'Aseliar',
             'last_name': 'Klevcov',
@@ -20,7 +20,7 @@ class UserTestCase(TestCase):
         }
 
     def test_user_list(self):
-        response = self.client.get(reverse('user_list'))
+        response = self.client.get(reverse('users'))
         print(response)
-        self.assertEqual(response.status_code, '200')
+        self.assertEqual(response.status_code, 200)
 # Create your tests here.
