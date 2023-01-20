@@ -1,0 +1,26 @@
+[
+{
+  "model": "tasks.task",
+  "pk": 4,
+  "fields": {
+    "name": "Что-то",
+    "description": "Как-то",
+    "status": 5,
+    "author": 12,
+    "executor": 12,
+    "timestamp": "2023-01-20T11:31:20.825Z"
+  }
+},
+{
+  "model": "tasks.task",
+  "pk": 5,
+  "fields": {
+    "name": "Some",
+    "description": "very",
+    "status": 5,
+    "author": 12,
+    "executor": 13,
+    "timestamp": "2023-01-20T11:31:48.780Z"
+  }
+}
+]

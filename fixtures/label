@@ -1,0 +1,26 @@
+[
+{
+  "model": "labels.label",
+  "pk": 1,
+  "fields": {
+    "name": "Python",
+    "timestamp": "2023-01-18T12:24:15.424Z"
+  }
+},
+{
+  "model": "labels.label",
+  "pk": 2,
+  "fields": {
+    "name": "Django",
+    "timestamp": "2023-01-18T12:24:33.884Z"
+  }
+},
+{
+  "model": "labels.label",
+  "pk": 3,
+  "fields": {
+    "name": "Bug",
+    "timestamp": "2023-01-18T12:24:43.633Z"
+  }
+}
+]

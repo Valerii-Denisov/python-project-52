@@ -1,0 +1,26 @@
+[
+{
+  "model": "statuses.status",
+  "pk": 4,
+  "fields": {
+    "name": "В работе",
+    "timestamp": "2023-01-17T06:18:26.557Z"
+  }
+},
+{
+  "model": "statuses.status",
+  "pk": 5,
+  "fields": {
+    "name": "Ожидание",
+    "timestamp": "2023-01-17T13:56:18.680Z"
+  }
+},
+{
+  "model": "statuses.status",
+  "pk": 6,
+  "fields": {
+    "name": "Выполнено",
+    "timestamp": "2023-01-17T13:56:26.812Z"
+  }
+}
+]

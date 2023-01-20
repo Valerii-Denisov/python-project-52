@@ -1,0 +1,56 @@
+[
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$bkFwdsidZ0jLr8spsJufDU$aOltMlum9AsAKbTH9fZCkf/LHn6VVJhPxVuPAim6eg8=",
+    "last_login": "2023-01-09T12:01:11.600Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "aseliar@yandex.ru",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-01-09T12:00:40.908Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 12,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$McTsAQpxQHQnVggiNE7HxV$FG/C9Mhg3ATSSPsvxVp3MOjoJhuE5haUdpnmpxP/rEE=",
+    "last_login": "2023-01-20T11:29:05.726Z",
+    "is_superuser": false,
+    "username": "Сашлык",
+    "first_name": "Александр",
+    "last_name": "Шлыков",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-01-20T11:26:12.333Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 13,
+  "fields": {
+    "password": "pbkdf2_sha256$390000$JWitpNvNYX9qC7rmzwyoz5$B3Qe+9gvm9Vz60TRr90vIt0Zc48iQrTzlJW9WHD2lSA=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Пикачу",
+    "first_name": "Буьбозавр",
+    "last_name": "Хомяков",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2023-01-20T11:27:03.619Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

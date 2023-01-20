@@ -147,6 +147,7 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'), )
 
 STATIC_URL = 'static/'
 
+
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
@@ -159,3 +160,5 @@ AUTH_USER_MODEL = 'users.User'
 LOGIN_REDIRECT_URL = 'Home'
 
 LOGOUT_REDIRECT_URL = 'Home'
+
+FIXTURES = [os.path.join(BASE_DIR, 'fixtures')]
