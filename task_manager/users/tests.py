@@ -77,8 +77,10 @@ class UserTestCase(TestCase):
         self.assertEqual(len(User.objects.all()), 3)
         """ POST """
         post_response = self.client.post(del_user1, follow=True)
-        self.assertContains(post_response,
-                            _('You dont have the rights to change another user'))
+        self.assertContains(
+            post_response,
+            _('You dont have the rights to change another user'),
+        )
 
     def delete_user_without_tasks(self):
         self.client.force_login(self.user3)
@@ -91,7 +93,10 @@ class UserTestCase(TestCase):
         self.assertRedirects(post_response, self.user_list)
         with self.assertRaises(ObjectDoesNotExist):
             User.objects.get(pk=3)
-        self.assertContains(post_response, _('The user has been successfully deleted'))
+        self.assertContains(
+            post_response,
+            _('The user has been successfully deleted'),
+        )
 
     def delete_user_with_tasks(self):
         self.client.force_login(self.user2)
@@ -102,6 +107,7 @@ class UserTestCase(TestCase):
         self.assertEqual(len(User.objects.all()), 3)
         """ POST """
         post_response = self.client.post(del_user2, follow=True)
-        self.assertContains(post_response, _('It is not possible to delete a user because it is being used'))
-
-        # Create your tests here.
+        self.assertContains(
+            post_response,
+            _('It is not possible to delete a user because it is being used'),
+        )

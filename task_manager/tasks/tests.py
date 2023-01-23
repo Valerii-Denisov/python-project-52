@@ -75,14 +75,19 @@ class TasksTestCase(TestCase):
         get_response = self.client.get(self.create_task)
         self.assertEqual(get_response.status_code, 200)
         """ POST """
-        post_response = self.client.post(self.create_task,
-                                         self.form_data,
-                                         follow=True)
+        post_response = self.client.post(
+            self.create_task,
+            self.form_data,
+            follow=True,
+        )
         self.assertRedirects(post_response, self.tasks)
         new_task = Task.objects.get(name=self.form_data['name'])
         self.assertEqual(new_task.executor.id, self.user2.id)
         self.assertEqual(new_task.author.id, self.user1.id)
-        self.assertContains(post_response, _('The tasks has been successfully registered'))
+        self.assertContains(
+            post_response,
+            _('The tasks has been successfully registered'),
+        )
 
     def test_update_task(self):
         self.client.force_login(self.user1)
@@ -96,7 +101,10 @@ class TasksTestCase(TestCase):
                                          follow=True)
         self.assertRedirects(post_response, self.tasks)
         self.assertEqual(Task.objects.get(pk=2).executor, self.user2)
-        self.assertContains(post_response, _('The task has been successfully updated'))
+        self.assertContains(
+            post_response,
+            _('The task has been successfully updated'),
+        )
 
     def test_delete_self_task(self):
         self.client.force_login(self.user3)
@@ -108,7 +116,10 @@ class TasksTestCase(TestCase):
         self.assertRedirects(post_response, self.tasks)
         with self.assertRaises(ObjectDoesNotExist):
             Task.objects.get(pk=7)
-        self.assertContains(post_response, _('The task has been successfully deleted'))
+        self.assertContains(
+            post_response,
+            _('The task has been successfully deleted'),
+        )
 
     def test_delete_not_self_task(self):
         self.client.force_login(self.user1)
@@ -123,8 +134,7 @@ class TasksTestCase(TestCase):
     def test_filter(self):
         self.client.force_login(self.user2)
         """ GET """
-        content_type_form1 = f'{self.tasks}' \
-                             '?status=1&executor=2&label='
+        content_type_form1 = f'{self.tasks}?status=1&executor=2&label='
         get_response = self.client.get(content_type_form1)
         tasks_list = get_response.context['tasks_list']
         self.assertEqual(len(tasks_list), 1)
@@ -133,8 +143,7 @@ class TasksTestCase(TestCase):
         self.assertEqual(task.executor.id, 2)
         self.assertEqual(task.status.id, 1)
         """ GET (self tasks) """
-        content_type_form2 = f'{self.tasks}' \
-                             '?self_task=on'
+        content_type_form2 = f'{self.tasks}?self_task=on'
         get_response2 = self.client.get(content_type_form2)
         tasks_list = get_response2.context['tasks_list']
         self.assertEqual(len(tasks_list), 2)

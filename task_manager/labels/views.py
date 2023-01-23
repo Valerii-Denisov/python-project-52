@@ -1,14 +1,14 @@
-from django.shortcuts import redirect
-from django.utils.translation import gettext as _
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import ProtectedError
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from task_manager.labels.models import Label
 from task_manager.labels.forms import Create
+from task_manager.labels.models import Label
 
 
 class LabelView(LoginRequiredMixin, ListView):
@@ -17,10 +17,12 @@ class LabelView(LoginRequiredMixin, ListView):
     context_object_name = 'labels_list'
     login_url = reverse_lazy('user_login')
 
-
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
+        messages.warning(
+            self.request,
+            _('You are not logged in! Please log in'),
+        )
         return redirect(url)
 
 
@@ -31,10 +33,15 @@ class LabelRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('labels')
     login_url = reverse_lazy('user_login')
     success_message = _('The label has been successfully registered')
+
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
+        messages.warning(
+            self.request,
+            _('You are not logged in! Please log in'),
+        )
         return redirect(url)
+
 
 class LabelEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     template_name = 'label_edit.html'
@@ -47,8 +54,12 @@ class LabelEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
+        messages.warning(
+            self.request,
+            _('You are not logged in! Please log in'),
+        )
         return redirect(url)
+
 
 class LabelDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     template_name = 'label_delete.html'
@@ -60,9 +71,11 @@ class LabelDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
 
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
+        messages.warning(
+            self.request,
+            _('You are not logged in! Please log in'),
+        )
         return redirect(url)
-
 
     def form_valid(self, form):
         try:
@@ -70,5 +83,8 @@ class LabelDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
             messages.success(self.request, self.success_message)
             return redirect(self.success_url)
         except ProtectedError:
-            messages.warning(self.request, _('It is not possible to delete a label because it is being used'))
+            messages.warning(
+                self.request,
+                _('It is not possible to delete a label because it is being used'), # noqa
+            )
             return redirect(self.success_url)

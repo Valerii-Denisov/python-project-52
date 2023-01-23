@@ -1,14 +1,15 @@
-from django.shortcuts import redirect
-from django.utils.translation import gettext as _
-from django.urls import reverse_lazy
-from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
-from django_filters.views import FilterView
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .filter import TaskFilter
-from task_manager.tasks.models import Task
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
+from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django_filters.views import FilterView
+
 from task_manager.tasks.forms import Create
+from task_manager.tasks.models import Task
+from .filter import TaskFilter
 
 
 class TaskView(LoginRequiredMixin, FilterView):
@@ -20,7 +21,9 @@ class TaskView(LoginRequiredMixin, FilterView):
 
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
+        messages.warning(self.request,
+                         _('You are not logged in! Please log in')
+                         )
         return redirect(url)
 
 
@@ -31,9 +34,12 @@ class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('tasks')
     success_message = _('The tasks has been successfully registered')
     login_url = reverse_lazy('user_login')
+
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
+        messages.warning(self.request,
+                         _('You are not logged in! Please log in')
+                         )
         return redirect(url)
 
     def form_valid(self, form):
@@ -52,10 +58,15 @@ class TaskEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
+        messages.warning(self.request,
+                         _('You are not logged in! Please log in')
+                         )
         return redirect(url)
 
-class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+
+class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
+                 DeleteView
+                 ):
     template_name = 'task_delete.html'
     model = Task
     success_url = reverse_lazy('tasks')
@@ -69,7 +80,9 @@ class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, D
 
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
-            message = _('You dont have the rights to delete task of another user')
+            message = _(
+                'You dont have the rights to delete task of another user'
+                )
             url = reverse_lazy('tasks')
         else:
             message = _('You are not logged in! Please log in')
@@ -83,7 +96,10 @@ class OneTaskView(LoginRequiredMixin, DetailView):
     model = Task
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
+
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request, _('You are not logged in! Please log in'))
+        messages.warning(self.request,
+                         _('You are not logged in! Please log in')
+                         )
         return redirect(url)

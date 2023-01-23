@@ -1,15 +1,15 @@
-from django.shortcuts import redirect
-from django.utils.translation import gettext as _
-from django.contrib.auth import authenticate, login
-from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
-from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import ProtectedError
+from django.shortcuts import redirect
+from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
-from task_manager.users.models import User
 from task_manager.users.forms import Register
+from task_manager.users.models import User
 
 
 class UsersView(ListView):
@@ -57,7 +57,6 @@ class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         messages.success(self.request, _('User successfully changed'))
         return redirect(self.success_url)
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         user_id = self.request.user.id
@@ -65,7 +64,12 @@ class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return context
 
 
-class UserDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+class UserDelete(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    SuccessMessageMixin,
+    DeleteView,
+):
     template_name = 'user_delete.html'
     model = User
     success_url = reverse_lazy('users')
@@ -93,6 +97,8 @@ class UserDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, D
             messages.success(self.request, self.success_message)
             return redirect(self.success_url)
         except ProtectedError:
-            messages.warning(self.request, _('It is not possible to delete a user because it is being used'))
+            messages.warning(
+                self.request,
+                _('It is not possible to delete a user because it is being used'), # noqa
+            )
             return redirect(self.success_url)
-

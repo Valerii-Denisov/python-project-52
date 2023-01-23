@@ -23,8 +23,7 @@ class TestStatusesWithoutAuth(TestCase):
 
 class StatusesTestCase(TestCase):
 
-    fixtures = ['status.json', 'user.json',
-                'task.json', 'label.json']
+    fixtures = ['status.json', 'user.json', 'task.json', 'label.json']
 
     def setUp(self):
         self.user = User.objects.get(pk=2)
@@ -51,11 +50,17 @@ class StatusesTestCase(TestCase):
         get_response = self.client.get(self.create_status)
         self.assertEqual(get_response.status_code, 200)
         """ POST """
-        post_response = self.client.post(self.create_status,
-                                         self.form_data, follow=True)
+        post_response = self.client.post(
+            self.create_status,
+            self.form_data,
+            follow=True,
+        )
         self.assertRedirects(post_response, self.statuses)
         self.assertTrue(Status.objects.get(id=4))
-        self.assertContains(post_response, _('The status has been successfully registered'))
+        self.assertContains(
+            post_response,
+            _('The status has been successfully registered'),
+        )
 
     def test_update_status(self):
         self.update_status = reverse('status_edit', args=[1])
@@ -63,12 +68,18 @@ class StatusesTestCase(TestCase):
         get_response = self.client.get(self.update_status)
         self.assertEqual(get_response.status_code, 200)
         """ POST """
-        post_response = self.client.post(self.update_status,
-                                         self.form_data, follow=True)
+        post_response = self.client.post(
+            self.update_status,
+            self.form_data,
+            follow=True,
+        )
         self.assertRedirects(post_response, self.statuses)
         self.status = Status.objects.get(pk=1)
         self.assertEqual(self.status.name, self.form_data['name'])
-        self.assertContains(post_response, _('The status has been successfully updated'))
+        self.assertContains(
+            post_response,
+            _('The status has been successfully updated'),
+        )
 
     def test_delete_used_status(self):
         self.delete_status = reverse('status_destroy', args=[1])
@@ -90,4 +101,7 @@ class StatusesTestCase(TestCase):
         self.assertRedirects(post_response, self.statuses)
         with self.assertRaises(ObjectDoesNotExist):
             Status.objects.get(pk=5)
-        self.assertContains(post_response, _('The status has been successfully deleted'))
+        self.assertContains(
+            post_response,
+            _('The status has been successfully deleted'),
+        )

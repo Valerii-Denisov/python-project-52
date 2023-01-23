@@ -52,7 +52,10 @@ class LabelsTestCase(TestCase):
         self.assertRedirects(post_response, self.labels)
         new_label = Label.objects.get(name=self.form_data['name'])
         self.assertEqual(new_label.id, 4)
-        self.assertContains(post_response, _('The label has been successfully registered'))
+        self.assertContains(
+            post_response,
+            _('The label has been successfully registered'),
+        )
 
     def test_update_label(self):
         self.update_label = reverse('label_edit', args=[1])
@@ -65,7 +68,10 @@ class LabelsTestCase(TestCase):
         self.assertRedirects(post_response, self.labels)
         updated_label = Label.objects.get(pk=1)
         self.assertEqual(updated_label.name, 'one more label')
-        self.assertContains(post_response, _('The label has been successfully updated'))
+        self.assertContains(
+            post_response,
+            _('The label has been successfully updated'),
+        )
 
     def test_delete_not_used_label(self):
         self.delete_label = reverse('label_destroy', args=[2])
@@ -77,7 +83,10 @@ class LabelsTestCase(TestCase):
         self.assertRedirects(post_response, self.labels)
         with self.assertRaises(ObjectDoesNotExist):
             Label.objects.get(pk=2)
-        self.assertContains(post_response, _('The label has been successfully deleted'))
+        self.assertContains(
+            post_response,
+            _('The label has been successfully deleted'),
+        )
 
     def test_delete_used_label(self):
         self.delete_label = reverse('label_destroy', args=[2])

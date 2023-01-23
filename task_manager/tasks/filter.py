@@ -13,14 +13,27 @@ class TaskFilter(FilterSet):
             author = getattr(self.request, 'user', None)
             queryset = queryset.filter(author=author)
         return queryset
-    status = ModelChoiceFilter(queryset=Status.objects.all(), label=_('Status'),
-                                  widget=forms.Select(attrs={'title_id': 'id_status'}))
-    executor = ModelChoiceFilter(queryset=User.objects.all(), label=_('Executor'),
-                                  widget=forms.Select(attrs={'title_id': 'id_executor'}))
-    labels = ModelChoiceFilter(queryset=Label.objects.all(), label =_('Label'), widget=forms.Select(attrs={'title_id': 'id_label'}))
-    self_task = BooleanFilter(label=_('My tasks only'), widget=forms.widgets.CheckboxInput(attrs={'title_id': 'id_self_task'}), method='my_custom_filter')
+    status = ModelChoiceFilter(
+        queryset=Status.objects.all(),
+        label=_('Status'),
+        widget=forms.Select(attrs={'title_id': 'id_status'}),
+    )
+    executor = ModelChoiceFilter(
+        queryset=User.objects.all(),
+        label=_('Executor'),
+        widget=forms.Select(attrs={'title_id': 'id_executor'}),
+    )
+    labels = ModelChoiceFilter(
+        queryset=Label.objects.all(),
+        label=_('Label'),
+        widget=forms.Select(attrs={'title_id': 'id_label'}),
+    )
+    self_task = BooleanFilter(
+        label=_('My tasks only'),
+        widget=forms.widgets.CheckboxInput(attrs={'title_id': 'id_self_task'}),
+        method='my_custom_filter',
+    )
 
     class Meta:
-            model = Task
-            fields = ['status', 'executor', 'labels', 'self_task']
-
+        model = Task
+        fields = ['status', 'executor', 'labels', 'self_task']

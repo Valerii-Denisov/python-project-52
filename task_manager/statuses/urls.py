@@ -6,5 +6,7 @@ urlpatterns = [
     path('', views.StatusView.as_view(), name='statuses'),
     path('create/', views.StatusRegister.as_view(), name='status_create'),
     path('<int:id>/update/', views.StatusEdit.as_view(), name='status_edit'),
-    path('<int:id>/delete/', views.StatusDelete.as_view(), name='status_destroy'),
-]
+    path('<int:id>/delete/',
+         views.StatusDelete.as_view(),
+         name='status_destroy',
+         )]
