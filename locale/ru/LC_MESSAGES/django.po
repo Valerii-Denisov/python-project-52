@@ -203,6 +203,8 @@ msgstr "Сохранить"
 
 #: task_manager/templates/user_edit.html:23
 #: task_manager/templates/task_edit.html:23
+#: task_manager/templates/label_edit.html:23
+#: task_manager/templates/status_edit.html:23
 msgid "To change"
 msgstr "Изменить"
 
