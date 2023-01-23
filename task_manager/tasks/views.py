@@ -82,7 +82,7 @@ class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
         if self.request.user.is_authenticated:
             message = _(
                 'You dont have the rights to delete task of another user'
-                )
+            )
             url = reverse_lazy('tasks')
         else:
             message = _('You are not logged in! Please log in')
