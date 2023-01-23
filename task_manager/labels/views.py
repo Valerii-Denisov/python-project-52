@@ -29,6 +29,7 @@ class LabelRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Label
     form_class = Create
     success_url = reverse_lazy('labels')
+    login_url = reverse_lazy('user_login')
     success_message = _('The label has been successfully registered')
     def handle_no_permission(self):
         url = self.login_url

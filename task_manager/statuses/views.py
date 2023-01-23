@@ -30,6 +30,7 @@ class StatusRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = Create
     success_url = reverse_lazy('statuses')
     success_message = _('The status has been successfully registered')
+    login_url = reverse_lazy('user_login')
     def handle_no_permission(self):
         url = self.login_url
         messages.warning(self.request, _('You are not logged in! Please log in'))

@@ -5,7 +5,7 @@ from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django_filters.views import FilterView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .filter import TaskFilter
 from task_manager.tasks.models import Task
 from task_manager.tasks.forms import Create
@@ -30,6 +30,7 @@ class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = Create
     success_url = reverse_lazy('tasks')
     success_message = _('The tasks has been successfully registered')
+    login_url = reverse_lazy('user_login')
     def handle_no_permission(self):
         url = self.login_url
         messages.warning(self.request, _('You are not logged in! Please log in'))
@@ -54,7 +55,7 @@ class TaskEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
         messages.warning(self.request, _('You are not logged in! Please log in'))
         return redirect(url)
 
-class TaskDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     template_name = 'task_delete.html'
     model = Task
     success_url = reverse_lazy('tasks')
@@ -63,8 +64,8 @@ class TaskDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     success_message = _('The task has been successfully deleted')
 
     def test_func(self):
-        user = self.get_object()
-        return self.request.user.id == user.id
+        task = self.get_object()
+        return self.request.user.id == task.author.id
 
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
