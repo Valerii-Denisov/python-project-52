@@ -203,6 +203,10 @@ msgstr "Редактировать метку"
 msgid "Save"
 msgstr "Сохранить"
 
+#: task_manager/templates/user_edit.html:23
+msgid "To change"
+msgstr "Изменить"
+
 #: task_manager/templates/labels.html:13
 #: task_manager/templates/statuses.html:13
 #: task_manager/templates/task_detail.html:28
