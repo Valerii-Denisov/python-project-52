@@ -47,7 +47,7 @@ msgstr "Метка была успешно обновлена"
 
 #: task_manager/labels/views.py:58
 msgid "The label has been successfully deleted"
-msgstr "Метка была успешно удалена"
+msgstr "Метка была успешно удалёна"
 
 #: task_manager/labels/views.py:72
 msgid "It is not possible to delete a label because it is being used"
@@ -63,7 +63,7 @@ msgstr "Статус был успешно обновлен"
 
 #: task_manager/statuses/views.py:59
 msgid "The status has been successfully deleted"
-msgstr "Статус был успешно удален"
+msgstr "Статус был успешно удалён"
 
 #: task_manager/statuses/views.py:73
 msgid "It is not possible to delete a status because it is being used"
@@ -115,7 +115,7 @@ msgstr "Задача была успешно обновлена"
 
 #: task_manager/tasks/views.py:63
 msgid "The task has been successfully deleted"
-msgstr "Задача была успешно удалена"
+msgstr "Задача была успешно удалёна"
 
 #: task_manager/tasks/views.py:71
 msgid "You dont have the rights to delete task of another user"
@@ -176,7 +176,7 @@ msgstr "Создать"
 
 #: task_manager/templates/label_delete.html:7
 msgid "Deleting a label"
-msgstr "Удаление метки"
+msgstr "удалёние метки"
 
 #: task_manager/templates/label_delete.html:11
 #: task_manager/templates/status_delete.html:11
@@ -235,7 +235,7 @@ msgstr "Создать статус"
 
 #: task_manager/templates/status_delete.html:7
 msgid "Deleting a status"
-msgstr "Удаление статуса"
+msgstr "удалёние статуса"
 
 #: task_manager/templates/status_edit.html:7
 msgid "Edit status"
@@ -252,7 +252,7 @@ msgstr "Создать задачу"
 
 #: task_manager/templates/task_delete.html:7
 msgid "Deleting a task"
-msgstr "Удаление задачи"
+msgstr "удалёние задачи"
 
 #: task_manager/templates/task_detail.html:5
 msgid "Viewing a task"
@@ -272,7 +272,7 @@ msgstr "Зарегистрировать"
 
 #: task_manager/templates/user_delete.html:7
 msgid "Deleting a user"
-msgstr "Удаление пользователя"
+msgstr "удалёние пользователя"
 
 #: task_manager/templates/user_edit.html:7
 msgid "Edit user"
@@ -300,7 +300,7 @@ msgstr "Пользователь успешно изменён"
 
 #: task_manager/users/views.py:74
 msgid "The user has been successfully deleted"
-msgstr "Пользователь успешно удален"
+msgstr "Пользователь успешно удалён"
 
 #: task_manager/users/views.py:96
 msgid "It is not possible to delete a user because it is being used"
