@@ -69,8 +69,13 @@ msgstr "Статус успешно удалён"
 msgid "It is not possible to delete a status because it is being used"
 msgstr "Невозможно удалить статус, потому что он используется"
 
-#: task_manager/tasks/filter.py:16 task_manager/tasks/models.py:11
+
 #: task_manager/templates/base.html:39
+#: task_manager/templates/statuses.html:5
+msgid "Statuses"
+msgstr "Статусы"
+
+#: task_manager/tasks/filter.py:16 task_manager/tasks/models.py:11
 #: task_manager/templates/task_detail.html:24
 #: task_manager/templates/tasks.html:21
 msgid "Status"
@@ -194,7 +199,7 @@ msgstr "Да, удалить"
 
 #: task_manager/templates/label_edit.html:7
 msgid "Edit label"
-msgstr "Редактировать метку"
+msgstr "Изменение метки"
 
 #: task_manager/templates/label_edit.html:23
 #: task_manager/templates/status_edit.html:23
@@ -236,15 +241,11 @@ msgstr "Создать статус"
 
 #: task_manager/templates/status_delete.html:7
 msgid "Deleting a status"
-msgstr "удалёние статуса"
+msgstr "Удаление статуса"
 
 #: task_manager/templates/status_edit.html:7
 msgid "Edit status"
-msgstr "Редактировать статус"
-
-#: task_manager/templates/statuses.html:5
-msgid "Statuses"
-msgstr "Статусы"
+msgstr "Изменение статуса"
 
 #: task_manager/templates/task_create.html:7
 #: task_manager/templates/tasks.html:7
@@ -253,7 +254,7 @@ msgstr "Создать задачу"
 
 #: task_manager/templates/task_delete.html:7
 msgid "Deleting a task"
-msgstr "удалёние задачи"
+msgstr "Удаление задачи"
 
 #: task_manager/templates/task_detail.html:5
 msgid "Viewing a task"
@@ -261,7 +262,7 @@ msgstr "Просмотр задачи"
 
 #: task_manager/templates/task_edit.html:7
 msgid "Edit task"
-msgstr "Редактировать задачу"
+msgstr "Изменение задачи"
 
 #: task_manager/templates/tasks.html:12
 msgid "Show"
@@ -273,7 +274,7 @@ msgstr "Зарегистрировать"
 
 #: task_manager/templates/user_delete.html:7
 msgid "Deleting a user"
-msgstr "удалёние пользователя"
+msgstr "Удаление пользователя"
 
 #: task_manager/templates/user_edit.html:7
 msgid "Edit user"
@@ -315,17 +316,3 @@ msgstr "Вы залогинены"
 msgid "You are logged out"
 msgstr "Вы разлогинены"
 
-#, fuzzy
-#~| msgid "Status"
-#~ msgid "status"
-#~ msgstr "Статусы"
-
-#, fuzzy
-#~| msgid "Executor"
-#~ msgid "executor"
-#~ msgstr "Исполнитель"
-
-#, fuzzy
-#~| msgid "Labels"
-#~ msgid "label"
-#~ msgstr "Метки"
