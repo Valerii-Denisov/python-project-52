@@ -1,8 +1,16 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "This project contains a web application 'Task manager'"
 authors = ["Valerii-Denisov <klerk919191@gmail.com>"]
+packages = [{ include = "task_manager"}]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Licence :: Free for non-commercial use",
+    "Operating System :: POSIX",
+    "Programming Language :: Python",
+]
+repository = "https://github.com/Valerii-Denisov/python-project-52/"
 
 [tool.poetry.dependencies]
 python = "^3.10"
