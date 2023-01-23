@@ -304,11 +304,11 @@ msgstr "Невозможно удалить пользователя, потом
 
 #: task_manager/views.py:14
 msgid "You are logged in"
-msgstr "Вы вошли в систему"
+msgstr "Вы залогинены"
 
 #: task_manager/views.py:19
 msgid "You are logged out"
-msgstr "Вы вышли из системы"
+msgstr "Вы разлогинены"
 
 #, fuzzy
 #~| msgid "Status"
