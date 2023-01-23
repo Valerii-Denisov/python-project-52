@@ -284,7 +284,7 @@ msgstr "Полное имя"
 
 #: task_manager/users/views.py:26
 msgid "The user has been successfully registered"
-msgstr "Пользователь был успешно зарегистрирован"
+msgstr "Пользователь успешно зарегистрирован"
 
 #: task_manager/users/views.py:43 task_manager/users/views.py:82
 msgid "You dont have the rights to change another user"
@@ -296,7 +296,7 @@ msgstr "Пользователь успешно изменен"
 
 #: task_manager/users/views.py:74
 msgid "The user has been successfully deleted"
-msgstr "Пользователь был успешно удален"
+msgstr "Пользователь успешно удален"
 
 #: task_manager/users/views.py:96
 msgid "It is not possible to delete a user because it is being used"
