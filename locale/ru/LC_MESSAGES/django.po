@@ -39,15 +39,15 @@ msgstr "Вы не вошли в систему! Пожалуйста, войди
 
 #: task_manager/labels/views.py:32
 msgid "The label has been successfully registered"
-msgstr "Метка была успешно создана"
+msgstr "Метка успешно создана"
 
 #: task_manager/labels/views.py:45
 msgid "The label has been successfully updated"
-msgstr "Метка была успешно обновлена"
+msgstr "Метка успешно обновлена"
 
 #: task_manager/labels/views.py:58
 msgid "The label has been successfully deleted"
-msgstr "Метка была успешно удалёна"
+msgstr "Метка успешно удалёна"
 
 #: task_manager/labels/views.py:72
 msgid "It is not possible to delete a label because it is being used"
@@ -55,15 +55,15 @@ msgstr "Невозможно удалить метку, потому что он
 
 #: task_manager/statuses/views.py:32
 msgid "The status has been successfully registered"
-msgstr "Статус был успешно создан"
+msgstr "Статус успешно создан"
 
 #: task_manager/statuses/views.py:46
 msgid "The status has been successfully updated"
-msgstr "Статус был успешно обновлен"
+msgstr "Статус успешно обновлен"
 
 #: task_manager/statuses/views.py:59
 msgid "The status has been successfully deleted"
-msgstr "Статус был успешно удалён"
+msgstr "Статус успешно удалён"
 
 #: task_manager/statuses/views.py:73
 msgid "It is not possible to delete a status because it is being used"
@@ -107,15 +107,15 @@ msgstr "Метки"
 
 #: task_manager/tasks/views.py:32
 msgid "The tasks has been successfully registered"
-msgstr "Задача былы успешно создана"
+msgstr "Задача успешно создана"
 
 #: task_manager/tasks/views.py:50
 msgid "The task has been successfully updated"
-msgstr "Задача была успешно обновлена"
+msgstr "Задача успешно обновлена"
 
 #: task_manager/tasks/views.py:63
 msgid "The task has been successfully deleted"
-msgstr "Задача была успешно удалёна"
+msgstr "Задача успешно удалёна"
 
 #: task_manager/tasks/views.py:71
 msgid "You dont have the rights to delete task of another user"
