@@ -166,7 +166,7 @@ msgstr "Узнать больше"
 #: task_manager/templates/label_create.html:7
 #: task_manager/templates/labels.html:7
 msgid "Create label"
-msgstr "Создание метки"
+msgstr "Создать метку"
 
 #: task_manager/templates/label_create.html:23
 #: task_manager/templates/status_create.html:23
