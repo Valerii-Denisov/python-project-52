@@ -12,6 +12,9 @@ from task_manager.labels.models import Label
 
 
 class LabelView(LoginRequiredMixin, ListView):
+    """
+    This class is responsible for displaying the list of label.
+    """
     template_name = 'labels.html'
     model = Label
     context_object_name = 'labels_list'
@@ -27,6 +30,9 @@ class LabelView(LoginRequiredMixin, ListView):
 
 
 class LabelRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """
+    This class is responsible for displaying the new label create page.
+    """
     template_name = 'label_create.html'
     model = Label
     form_class = Create
@@ -44,6 +50,9 @@ class LabelRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class LabelEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """
+    This class is responsible for displaying the label data modification page.
+    """
     template_name = 'label_edit.html'
     model = Label
     form_class = Create
@@ -62,6 +71,9 @@ class LabelEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class LabelDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    """
+    This class is responsible for displaying the label deletion page.
+    """
     template_name = 'label_delete.html'
     model = Label
     success_url = reverse_lazy('labels')

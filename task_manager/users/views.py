@@ -13,12 +13,18 @@ from task_manager.users.models import User
 
 
 class UsersView(ListView):
+    """
+    This class is responsible for displaying the list of users.
+    """
     template_name = 'users.html'
     model = User
     context_object_name = 'user_list'
 
 
 class UserRegister(SuccessMessageMixin, CreateView):
+    """
+    This class is responsible for displaying the new user registration page.
+    """
     template_name = 'user_create.html'
     model = User
     form_class = Register
@@ -27,6 +33,9 @@ class UserRegister(SuccessMessageMixin, CreateView):
 
 
 class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    """
+    This class is responsible for displaying the user data modification page.
+    """
     template_name = 'user_edit.html'
     model = User
     form_class = Register
@@ -70,6 +79,9 @@ class UserDelete(
     SuccessMessageMixin,
     DeleteView,
 ):
+    """
+    This class is responsible for displaying the user deletion page.
+    """
     template_name = 'user_delete.html'
     model = User
     success_url = reverse_lazy('users')

@@ -13,6 +13,9 @@ from .filter import TaskFilter
 
 
 class TaskView(LoginRequiredMixin, FilterView):
+    """
+    This class is responsible for displaying the list of task.
+    """
     template_name = 'tasks.html'
     model = Task
     context_object_name = 'tasks_list'
@@ -21,13 +24,17 @@ class TaskView(LoginRequiredMixin, FilterView):
 
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request,
-                         _('You are not logged in! Please log in')
-                         )
+        messages.warning(
+            self.request,
+            _('You are not logged in! Please log in'),
+        )
         return redirect(url)
 
 
 class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """
+    This class is responsible for displaying the new task create page.
+    """
     template_name = 'task_create.html'
     model = Task
     form_class = Create
@@ -37,9 +44,10 @@ class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request,
-                         _('You are not logged in! Please log in')
-                         )
+        messages.warning(
+            self.request,
+            _('You are not logged in! Please log in'),
+        )
         return redirect(url)
 
     def form_valid(self, form):
@@ -48,6 +56,9 @@ class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class TaskEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """
+    This class is responsible for displaying the task data modification page.
+    """
     template_name = 'task_edit.html'
     model = Task
     form_class = Create
@@ -58,15 +69,22 @@ class TaskEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request,
-                         _('You are not logged in! Please log in')
-                         )
+        messages.warning(
+            self.request,
+            _('You are not logged in! Please log in'),
+        )
         return redirect(url)
 
 
-class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
-                 DeleteView
-                 ):
+class TaskDelete(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    SuccessMessageMixin,
+    DeleteView,
+):
+    """
+    This class is responsible for displaying the task deletion page.
+    """
     template_name = 'task_delete.html'
     model = Task
     success_url = reverse_lazy('tasks')
@@ -81,7 +99,7 @@ class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
     def handle_no_permission(self):
         if self.request.user.is_authenticated:
             message = _(
-                'You dont have the rights to delete task of another user'
+                'You dont have the rights to delete task of another user',
             )
             url = reverse_lazy('tasks')
         else:
@@ -92,6 +110,9 @@ class TaskDelete(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin,
 
 
 class OneTaskView(LoginRequiredMixin, DetailView):
+    """
+    This class is responsible for displaying the task details page.
+    """
     template_name = 'task_detail.html'
     model = Task
     pk_url_kwarg = 'id'
@@ -99,7 +120,8 @@ class OneTaskView(LoginRequiredMixin, DetailView):
 
     def handle_no_permission(self):
         url = self.login_url
-        messages.warning(self.request,
-                         _('You are not logged in! Please log in')
-                         )
+        messages.warning(
+            self.request,
+            _('You are not logged in! Please log in'),
+        )
         return redirect(url)

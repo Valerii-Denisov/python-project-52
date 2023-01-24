@@ -12,6 +12,9 @@ from task_manager.statuses.forms import Create
 
 
 class StatusView(LoginRequiredMixin, ListView):
+    """
+    This class is responsible for displaying the list of status.
+    """
     template_name = 'statuses.html'
     model = Status
     context_object_name = 'statuses_list'
@@ -27,6 +30,9 @@ class StatusView(LoginRequiredMixin, ListView):
 
 
 class StatusRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    """
+    This class is responsible for displaying the new status create page.
+    """
     template_name = 'status_create.html'
     model = Status
     form_class = Create
@@ -44,6 +50,9 @@ class StatusRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class StatusEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    """
+    This class is responsible for displaying the status data modification page.
+    """
     template_name = 'status_edit.html'
     model = Status
     form_class = Create
@@ -62,6 +71,9 @@ class StatusEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class StatusDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+    """
+    This class is responsible for displaying the status deletion page.
+    """
     template_name = 'status_delete.html'
     model = Status
     success_url = reverse_lazy('statuses')
