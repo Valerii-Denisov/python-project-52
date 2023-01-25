@@ -15,7 +15,7 @@ class LabelView(LoginRequiredMixin, ListView):
     """
     This class is responsible for displaying the list of label.
     """
-    template_name = 'labels.html'
+    template_name = 'labels/labels.html'
     model = Label
     context_object_name = 'labels_list'
     login_url = reverse_lazy('user_login')
@@ -33,12 +33,13 @@ class LabelRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """
     This class is responsible for displaying the new label create page.
     """
-    template_name = 'label_create.html'
+    template_name = 'CRUD/create_update.html'
     model = Label
     form_class = Create
     success_url = reverse_lazy('labels')
     login_url = reverse_lazy('user_login')
     success_message = _('The label has been successfully registered')
+    extra_context = {'header': _('Create label'), 'button_name': _('Create')}
 
     def handle_no_permission(self):
         url = self.login_url
@@ -53,13 +54,14 @@ class LabelEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     This class is responsible for displaying the label data modification page.
     """
-    template_name = 'label_edit.html'
+    template_name = 'CRUD/create_update.html'
     model = Label
     form_class = Create
     success_url = reverse_lazy('labels')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
     success_message = _('The label has been successfully updated')
+    extra_context = {'header': _('Edit label'), 'button_name': _('To change')}
 
     def handle_no_permission(self):
         url = self.login_url
@@ -74,12 +76,13 @@ class LabelDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     """
     This class is responsible for displaying the label deletion page.
     """
-    template_name = 'label_delete.html'
+    template_name = 'CRUD/delete.html'
     model = Label
     success_url = reverse_lazy('labels')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
     success_message = _('The label has been successfully deleted')
+    extra_context = {'header': _('Deleting a label')}
 
     def handle_no_permission(self):
         url = self.login_url

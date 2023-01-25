@@ -16,7 +16,7 @@ class UsersView(ListView):
     """
     This class is responsible for displaying the list of users.
     """
-    template_name = 'users.html'
+    template_name = 'users/users.html'
     model = User
     context_object_name = 'user_list'
 
@@ -25,23 +25,25 @@ class UserRegister(SuccessMessageMixin, CreateView):
     """
     This class is responsible for displaying the new user registration page.
     """
-    template_name = 'user_create.html'
+    template_name = 'CRUD/create_update.html'
     model = User
     form_class = Register
     success_url = reverse_lazy('user_login')
     success_message = _('The user has been successfully registered')
+    extra_context = {'header': _('Registration'), 'button_name': _('Register')}
 
 
 class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
     This class is responsible for displaying the user data modification page.
     """
-    template_name = 'user_edit.html'
+    template_name = 'CRUD/create_update.html'
     model = User
     form_class = Register
     success_url = reverse_lazy('users')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
+    extra_context = {'header': _('Edit user'), 'button_name': _('To change')}
 
     def test_func(self):
         user = self.get_object()
@@ -82,12 +84,13 @@ class UserDelete(
     """
     This class is responsible for displaying the user deletion page.
     """
-    template_name = 'user_delete.html'
+    template_name = 'CRUD/delete.html'
     model = User
     success_url = reverse_lazy('users')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
     success_message = _('The user has been successfully deleted')
+    extra_context = {'header': _('Deleting a user')}
 
     def test_func(self):
         user = self.get_object()

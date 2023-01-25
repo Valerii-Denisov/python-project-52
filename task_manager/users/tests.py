@@ -35,7 +35,7 @@ class UserTestCase(TestCase):
     def test_user_create(self):
         response = self.client.get(reverse('user_create'))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user_create.html')
+        self.assertTemplateUsed(response, 'CRUD/create_update.html')
         request = self.client.post(
             reverse('user_create'),
             self.form_data,
@@ -52,7 +52,7 @@ class UserTestCase(TestCase):
         self.client.force_login(self.user2)
         response = self.client.get(reverse('user_edit', args=[2]))
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'user_edit.html')
+        self.assertTemplateUsed(response, 'CRUD/create_update.html')
         request = self.client.post(
             reverse('user_edit', args=[2]),
             self.form_data,

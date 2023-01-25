@@ -16,7 +16,7 @@ class TaskView(LoginRequiredMixin, FilterView):
     """
     This class is responsible for displaying the list of task.
     """
-    template_name = 'tasks.html'
+    template_name = 'tasks/tasks.html'
     model = Task
     context_object_name = 'tasks_list'
     login_url = reverse_lazy('user_login')
@@ -35,12 +35,13 @@ class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     """
     This class is responsible for displaying the new task create page.
     """
-    template_name = 'task_create.html'
+    template_name = 'CRUD/create_update.html'
     model = Task
     form_class = Create
     success_url = reverse_lazy('tasks')
     success_message = _('The tasks has been successfully registered')
     login_url = reverse_lazy('user_login')
+    extra_context = {'header': _('Create task'), 'button_name': _('Create')}
 
     def handle_no_permission(self):
         url = self.login_url
@@ -59,13 +60,14 @@ class TaskEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     """
     This class is responsible for displaying the task data modification page.
     """
-    template_name = 'task_edit.html'
+    template_name = 'CRUD/create_update.html'
     model = Task
     form_class = Create
     success_url = reverse_lazy('tasks')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
     success_message = _('The task has been successfully updated')
+    extra_context = {'header': _('Edit task'), 'button_name': _('To change')}
 
     def handle_no_permission(self):
         url = self.login_url
@@ -85,12 +87,13 @@ class TaskDelete(
     """
     This class is responsible for displaying the task deletion page.
     """
-    template_name = 'task_delete.html'
+    template_name = 'CRUD/delete.html'
     model = Task
     success_url = reverse_lazy('tasks')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
     success_message = _('The task has been successfully deleted')
+    extra_context = {'header': _('Deleting a task')}
 
     def test_func(self):
         task = self.get_object()
@@ -113,7 +116,7 @@ class OneTaskView(LoginRequiredMixin, DetailView):
     """
     This class is responsible for displaying the task details page.
     """
-    template_name = 'task_detail.html'
+    template_name = 'tasks/task_detail.html'
     model = Task
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')

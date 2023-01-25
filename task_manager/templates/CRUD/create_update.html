@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h1 class="my-4">{% translate "Edit task" %}</h1>
+<h1 class="my-4">{{ header }}</h1>
 {% if form.subject.errors %}
 <div>
     <ul>
@@ -20,7 +20,7 @@
         <table>
            {% bootstrap_form form %}
         </table>
-        <button class="btn btn-primary btn-lg" type="submit">{% translate "To change" %}</button>
+        <button class="btn btn-primary btn-lg" type="submit">{{ button_name }}</button>
     </div>
 </form>
 {% endblock %}
