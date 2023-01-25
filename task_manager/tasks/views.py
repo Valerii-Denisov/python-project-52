@@ -10,28 +10,20 @@ from django_filters.views import FilterView
 from task_manager.tasks.forms import Create
 from task_manager.tasks.models import Task
 from .filter import TaskFilter
+from ..utils import HandelNoPermissionMixin
 
 
-class TaskView(LoginRequiredMixin, FilterView):
+class TaskView(HandelNoPermissionMixin, FilterView):
     """
     This class is responsible for displaying the list of task.
     """
     template_name = 'tasks/tasks.html'
     model = Task
     context_object_name = 'tasks_list'
-    login_url = reverse_lazy('user_login')
     filterset_class = TaskFilter
 
-    def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(
-            self.request,
-            _('You are not logged in! Please log in'),
-        )
-        return redirect(url)
 
-
-class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class TaskRegister(HandelNoPermissionMixin, SuccessMessageMixin, CreateView):
     """
     This class is responsible for displaying the new task create page.
     """
@@ -40,23 +32,14 @@ class TaskRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = Create
     success_url = reverse_lazy('tasks')
     success_message = _('The tasks has been successfully registered')
-    login_url = reverse_lazy('user_login')
     extra_context = {'header': _('Create task'), 'button_name': _('Create')}
-
-    def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(
-            self.request,
-            _('You are not logged in! Please log in'),
-        )
-        return redirect(url)
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
 
-class TaskEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class TaskEdit(HandelNoPermissionMixin, SuccessMessageMixin, UpdateView):
     """
     This class is responsible for displaying the task data modification page.
     """
@@ -65,17 +48,8 @@ class TaskEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = Create
     success_url = reverse_lazy('tasks')
     pk_url_kwarg = 'id'
-    login_url = reverse_lazy('user_login')
     success_message = _('The task has been successfully updated')
     extra_context = {'header': _('Edit task'), 'button_name': _('To change')}
-
-    def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(
-            self.request,
-            _('You are not logged in! Please log in'),
-        )
-        return redirect(url)
 
 
 class TaskDelete(
@@ -112,19 +86,10 @@ class TaskDelete(
         return redirect(url)
 
 
-class OneTaskView(LoginRequiredMixin, DetailView):
+class OneTaskView(HandelNoPermissionMixin, DetailView):
     """
     This class is responsible for displaying the task details page.
     """
     template_name = 'tasks/task_detail.html'
     model = Task
     pk_url_kwarg = 'id'
-    login_url = reverse_lazy('user_login')
-
-    def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(
-            self.request,
-            _('You are not logged in! Please log in'),
-        )
-        return redirect(url)

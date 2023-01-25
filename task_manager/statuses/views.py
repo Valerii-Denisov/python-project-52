@@ -1,35 +1,23 @@
-from django.shortcuts import redirect
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
-from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models import ProtectedError
 
 from task_manager.statuses.models import Status
 from task_manager.statuses.forms import Create
+from task_manager.utils import DeleteFormValidMixin, HandelNoPermissionMixin
 
 
-class StatusView(LoginRequiredMixin, ListView):
+class StatusView(HandelNoPermissionMixin, ListView):
     """
     This class is responsible for displaying the list of status.
     """
     template_name = 'statuses/statuses.html'
     model = Status
     context_object_name = 'statuses_list'
-    login_url = reverse_lazy('user_login')
-
-    def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(
-            self.request,
-            _('You are not logged in! Please log in'),
-        )
-        return redirect(url)
 
 
-class StatusRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+class StatusRegister(HandelNoPermissionMixin, SuccessMessageMixin, CreateView):
     """
     This class is responsible for displaying the new status create page.
     """
@@ -38,19 +26,10 @@ class StatusRegister(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     form_class = Create
     success_url = reverse_lazy('statuses')
     success_message = _('The status has been successfully registered')
-    login_url = reverse_lazy('user_login')
     extra_context = {'header': _('Create status'), 'button_name': _('Create')}
 
-    def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(
-            self.request,
-            _('You are not logged in! Please log in'),
-        )
-        return redirect(url)
 
-
-class StatusEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+class StatusEdit(HandelNoPermissionMixin, SuccessMessageMixin, UpdateView):
     """
     This class is responsible for displaying the status data modification page.
     """
@@ -59,47 +38,15 @@ class StatusEdit(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     form_class = Create
     success_url = reverse_lazy('statuses')
     pk_url_kwarg = 'id'
-    login_url = reverse_lazy('user_login')
     success_message = _('The status has been successfully updated')
     extra_context = {'header': _('Edit status'), 'button_name': _('To change')}
 
-    def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(
-            self.request,
-            _('You are not logged in! Please log in'),
-        )
-        return redirect(url)
 
-
-class StatusDelete(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
+class StatusDelete(HandelNoPermissionMixin, DeleteFormValidMixin, DeleteView):
     """
     This class is responsible for displaying the status deletion page.
     """
     template_name = 'CRUD/delete.html'
     model = Status
-    success_url = reverse_lazy('statuses')
     pk_url_kwarg = 'id'
-    login_url = reverse_lazy('user_login')
-    success_message = _('The status has been successfully deleted')
     extra_context = {'header': _('Deleting a status')}
-
-    def handle_no_permission(self):
-        url = self.login_url
-        messages.warning(
-            self.request,
-            _('You are not logged in! Please log in'),
-        )
-        return redirect(url)
-
-    def form_valid(self, form):
-        try:
-            self.object.delete()
-            messages.success(self.request, self.success_message)
-            return redirect(self.success_url)
-        except ProtectedError:
-            messages.warning(
-                self.request,
-                _('It is not possible to delete a status because it is being used'),# noqa
-            )
-            return redirect(self.success_url)

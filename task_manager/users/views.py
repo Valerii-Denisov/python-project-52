@@ -2,7 +2,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.db.models import ProtectedError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
@@ -10,6 +9,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 
 from task_manager.users.forms import Register
 from task_manager.users.models import User
+from task_manager.utils import DeleteFormValidMixin
 
 
 class UsersView(ListView):
@@ -78,7 +78,7 @@ class UserEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class UserDelete(
     LoginRequiredMixin,
     UserPassesTestMixin,
-    SuccessMessageMixin,
+    DeleteFormValidMixin,
     DeleteView,
 ):
     """
@@ -86,10 +86,8 @@ class UserDelete(
     """
     template_name = 'CRUD/delete.html'
     model = User
-    success_url = reverse_lazy('users')
     pk_url_kwarg = 'id'
     login_url = reverse_lazy('user_login')
-    success_message = _('The user has been successfully deleted')
     extra_context = {'header': _('Deleting a user')}
 
     def test_func(self):
@@ -105,15 +103,3 @@ class UserDelete(
             url = self.login_url
         messages.warning(self.request, message)
         return redirect(url)
-
-    def form_valid(self, form):
-        try:
-            self.object.delete()
-            messages.success(self.request, self.success_message)
-            return redirect(self.success_url)
-        except ProtectedError:
-            messages.warning(
-                self.request,
-                _('It is not possible to delete a user because it is being used'), # noqa
-            )
-            return redirect(self.success_url)
