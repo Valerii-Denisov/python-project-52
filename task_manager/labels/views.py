@@ -17,7 +17,6 @@ class LabelView(HandelNoPermissionMixin, ListView):
     context_object_name = 'labels_list'
 
 
-
 class LabelRegister(HandelNoPermissionMixin, SuccessMessageMixin, CreateView):
     """
     This class is responsible for displaying the new label create page.
