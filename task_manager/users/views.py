@@ -19,6 +19,7 @@ class UsersView(ListView):
     template_name = 'users/users.html'
     model = User
     context_object_name = 'user_list'
+    ordering = 'id'
 
 
 class UserRegister(SuccessMessageMixin, CreateView):
